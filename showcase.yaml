@@ -1,0 +1,6 @@
+type: "runtime"
+use_mariadb: true
+
+http_proxy: null
+startup: null
+entrypoint: "cat"
