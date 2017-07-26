@@ -1,6 +1,6 @@
 type: "runtime"
 use_mariadb: true
 
-http_proxy: null
-startup: null
-entrypoint: "cat"
+http_proxy: 3000
+startup: "godep restore"
+entrypoint: "godep go build -o a.out && ./a.out"

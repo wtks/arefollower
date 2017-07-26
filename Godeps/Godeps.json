@@ -1,0 +1,82 @@
+{
+	"ImportPath": "git.trapti.tech/arefollower",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/dgrijalva/jwt-go",
+			"Comment": "v3.0.0-20-ga539ee1",
+			"Rev": "a539ee1a749a2b895533f979515ac7e6e0f5b650"
+		},
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.3-28-g3955978",
+			"Rev": "3955978caca48c1658a4bb7a9c6a0f084e326af3"
+		},
+		{
+			"ImportPath": "github.com/labstack/echo",
+			"Comment": "v3.2.1-11-gd79c131",
+			"Rev": "d79c13108c62b80d3dfa550bfe94ade4290b2bc8"
+		},
+		{
+			"ImportPath": "github.com/labstack/echo/middleware",
+			"Comment": "v3.2.1-11-gd79c131",
+			"Rev": "d79c13108c62b80d3dfa550bfe94ade4290b2bc8"
+		},
+		{
+			"ImportPath": "github.com/labstack/gommon/bytes",
+			"Comment": "v0.2.1-1-gbf40841",
+			"Rev": "bf40841f7287bd5503a5ba2806e8dbf654716e59"
+		},
+		{
+			"ImportPath": "github.com/labstack/gommon/color",
+			"Comment": "v0.2.1-1-gbf40841",
+			"Rev": "bf40841f7287bd5503a5ba2806e8dbf654716e59"
+		},
+		{
+			"ImportPath": "github.com/labstack/gommon/log",
+			"Comment": "v0.2.1-1-gbf40841",
+			"Rev": "bf40841f7287bd5503a5ba2806e8dbf654716e59"
+		},
+		{
+			"ImportPath": "github.com/labstack/gommon/random",
+			"Comment": "v0.2.1-1-gbf40841",
+			"Rev": "bf40841f7287bd5503a5ba2806e8dbf654716e59"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Comment": "v0.0.8",
+			"Rev": "941b50ebc6efddf4c41c8e4537a5f68a4e686b24"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Comment": "v0.0.2",
+			"Rev": "fc9e8d8ef48496124e79ae0df75490096eccf6fe"
+		},
+		{
+			"ImportPath": "github.com/robfig/cron",
+			"Comment": "v1-58-g736158d",
+			"Rev": "736158dc09e10f1911ca3a1e1b01f11b566ce5db"
+		},
+		{
+			"ImportPath": "github.com/valyala/bytebufferpool",
+			"Rev": "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
+		},
+		{
+			"ImportPath": "github.com/valyala/fasttemplate",
+			"Rev": "dcecefd839c4193db0d35b88ec65b4c12d360ab0"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/acme",
+			"Rev": "a48ac81e47fd6f9ed1258f3b60ae9e75f93cb7ed"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/acme/autocert",
+			"Rev": "a48ac81e47fd6f9ed1258f3b60ae9e75f93cb7ed"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "c23410a886927bab8ca5e80b08af6a56faeb330d"
+		}
+	]
+}
