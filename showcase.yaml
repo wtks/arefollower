@@ -4,3 +4,4 @@ use_mariadb: true
 http_proxy: 3000
 startup: "godep restore"
 entrypoint: "godep go build -o a.out && ./a.out"
+cname: "are.takashi_trap.trap.show"

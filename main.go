@@ -8,7 +8,9 @@ import (
 	"github.com/labstack/echo/middleware"
 	"github.com/robfig/cron"
 	"log"
+	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -50,14 +52,16 @@ func main() {
 
 	//init & start cron
 	c := cron.New()
-	c.AddFunc("0 5 * * * *", crawlRanking)
+	c.AddFunc("0 1 * * * *", crawlRanking)
 	c.Start()
 
 	//init & start http server
 	e := echo.New()
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
-	e.Static("/static", "static")
+	e.Static("/", "static")
+	e.GET("/api/yesterday.jsonp", getYesterdayRanking)
+	e.GET("/api/24ago.jsonp", get24AgoRanking)
 	e.Logger.Fatal(e.Start(":3000"))
 }
 
@@ -98,4 +102,53 @@ func crawlRanking() {
 			log.Fatal(err)
 		}
 	}
+}
+
+func getYesterdayRanking(c echo.Context) error {
+	yesterday := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
+	query := c.QueryParam("hour")
+	var rows *sql.Rows
+	var err error
+	if query != "" {
+		if hour, err := strconv.Atoi(query); err == nil && 0 <= hour && hour <= 23 {
+			rows, err = conn.Query("SELECT video_id FROM ranking WHERE ranked_datetime=?", fmt.Sprintf("%s %02d:00:00", yesterday, hour))
+		} else {
+			return echo.NewHTTPError(http.StatusBadRequest)
+		}
+	} else {
+		rows, err = conn.Query("SELECT video_id FROM ranking WHERE ranked_datetime BETWEEN ? AND ?", yesterday+" 00:00:00", yesterday+" 23:59:59")
+	}
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError)
+	}
+	defer rows.Close()
+	videos := toArray(rows)
+
+	return c.JSONP(http.StatusOK, "callback", *videos)
+}
+
+func get24AgoRanking(c echo.Context) error {
+	ago := time.Now().Add(-24 * time.Hour).Format("2006-01-02 15:") + ":00:00"
+
+	rows, err := conn.Query("SELECT video_id FROM ranking WHERE ranked_datetime=?", ago)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError)
+	}
+	defer rows.Close()
+	videos := toArray(rows)
+
+	return c.JSONP(http.StatusOK, "callback", *videos)
+}
+
+func toArray(rows *sql.Rows) *[]string {
+	arr := make([]string, 0, 200)
+	for rows.Next() {
+		id := ""
+		err := rows.Scan(&id)
+		if err != nil {
+			continue
+		}
+		arr = append(arr, id)
+	}
+	return &arr
 }
